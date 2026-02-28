@@ -12,8 +12,10 @@ import { DataFile, JSONFile } from "lowdb/node";
 import type { PackageJson } from "type-fest";
 
 import { fileURLToPath } from "node:url";
+import { NormalizedAdapter } from "./adapters/normalized-adapter.ts";
+import type { RawData } from "./adapters/normalized-adapter.ts";
+import { Observer } from "./adapters/observer.ts";
 import { createApp } from "./app.ts";
-import { Observer } from "./observer.ts";
 import type { Data } from "./service.ts";
 
 function help() {
@@ -123,16 +125,16 @@ if (readFileSync(file, "utf-8").trim() === "") {
 }
 
 // Set up database
-let adapter: Adapter<Data>;
+let adapter: Adapter<RawData>;
 if (extname(file) === ".json5") {
-  adapter = new DataFile<Data>(file, {
+  adapter = new DataFile<RawData>(file, {
     parse: JSON5.parse,
     stringify: JSON5.stringify,
   });
 } else {
-  adapter = new JSONFile<Data>(file);
+  adapter = new JSONFile<RawData>(file);
 }
-const observer = new Observer(adapter);
+const observer = new Observer(new NormalizedAdapter(adapter));
 
 const db = new Low<Data>(observer, {});
 await db.read();
@@ -183,6 +185,7 @@ app.listen(port, () => {
 // Watch file for changes
 if (process.env["NODE_ENV"] !== "production") {
   let writing = false; // true if the file is being written to by the app
+  let hadReadError = false;
   let prevEndpoints = "";
 
   observer.onWriteStart = () => {
@@ -200,16 +203,18 @@ if (process.env["NODE_ENV"] !== "production") {
     }
 
     const nextEndpoints = JSON.stringify(Object.keys(data).sort());
-    if (prevEndpoints !== nextEndpoints) {
+    if (hadReadError || prevEndpoints !== nextEndpoints) {
       console.log();
       logRoutes(data);
     }
+    hadReadError = false;
   };
   watch(file).on("change", () => {
     // Do no reload if the file is being written to by the app
     if (!writing) {
       db.read().catch((e) => {
         if (e instanceof SyntaxError) {
+          hadReadError = true;
           return console.log(chalk.red(["", `Error parsing ${file}`, e.message].join("\n")));
         }
         console.log(e);

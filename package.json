@@ -1,9 +1,23 @@
 {
   "name": "json-server",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.12",
   "description": "",
-  "keywords": [],
-  "license": "SEE LICENSE IN ./LICENSE",
+  "keywords": [
+    "JSON",
+    "server",
+    "fake",
+    "REST",
+    "API",
+    "prototyping",
+    "mock",
+    "mocking",
+    "test",
+    "testing",
+    "rest",
+    "data",
+    "dummy"
+  ],
+  "license": "MIT",
   "author": "typicode <typicode@gmail.com>",
   "repository": {
     "type": "git",
@@ -14,7 +28,8 @@
   },
   "files": [
     "lib",
-    "views"
+    "views",
+    "schema.json"
   ],
   "type": "module",
   "scripts": {
