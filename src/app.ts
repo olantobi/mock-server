@@ -78,17 +78,37 @@ export function createApp(db: Low<Data>, options: AppOptions = {}) {
     next?.()
   })
 
+    app.post('/:name', (req, res, next) => {
+    const { name = '' } = req.params
+    const query: Query = {}
+
+    Object.keys(req.query).forEach((key) => {
+      let value: QueryValue = req.query[key]
+
+      if (
+        ['_start', '_end', '_limit', '_page', '_per_page'].includes(key) &&
+        typeof value === 'string'
+      ) {
+        value = parseInt(value)
+      }
+
+      if (!Number.isNaN(value)) {
+        query[key] = value
+      }
+    })
+    res.locals['data'] = service.find(name, query)
+    next?.()
+  })
+
   app.get('/:name/:id', (req, res, next) => {
     const { name = '', id = '' } = req.params
     res.locals['data'] = service.findById(name, id, req.query)
     next?.()
   })
 
-  app.post('/:name', async (req, res, next) => {
-    const { name = '' } = req.params
-    if (isItem(req.body)) {
-      res.locals['data'] = await service.create(name, req.body)
-    }
+  app.post('/:name/:id', (req, res, next) => {
+    const { name = '', id = '' } = req.params
+    res.locals['data'] = service.findById(name, id, req.query)
     next?.()
   })
 
@@ -135,7 +155,7 @@ export function createApp(db: Low<Data>, options: AppOptions = {}) {
     if (data === undefined) {
       res.sendStatus(404)
     } else {
-      if (req.method === 'POST') res.status(201)
+      // if (req.method === 'POST') res.status(201)
       res.json(data)
     }
   })

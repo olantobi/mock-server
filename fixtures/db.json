@@ -1,13 +1,135 @@
 {
-  "posts": [
-    { "id": "1", "title": "a title" },
-    { "id": "2", "title": "another title" }
-  ],
-  "comments": [
-    { "id": "1", "text": "a comment about post 1", "postId": "1" },
-    { "id": "2", "text": "another comment about post 1", "postId": "1" }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+    "confirm-ie-details": {    
+        "success": true,
+        "responseCode": "00",
+        "message": "Confirm Details",
+        "data":{
+        "response": {
+            "accountNO": "0102349559",
+            "accountType": "NMD",
+            "meterSerialNO": "45700538072",
+            "minimumVend": "6.32",
+            "name": "HON. OKEOWO",
+            "outstandingDebt": 500,
+            "serviceAddress": "3 NELSON NWEKE MAGODO II",
+            "orgName": "ikeja",
+            "tariffName": "A-Bilateral",
+            "feederName": "Bilateral"
+            }
+        }
+    },
+    "business": [
+        {
+            "id": "process-ie-transaction",
+            "success": true,
+            "responseCode": "00",
+            "message": "Transaction processed",
+            "data":{ 
+                    "ref": "",
+                    "customRef": "",
+                    "amount": "",
+                    "dtNO": "1000245809",
+                    "accountNO": "0102377979",
+                    "totalUnits": "32.7",
+                    "dtName": "11-MagodoINJ-T2-CMD-KASUMU",
+                    "rate": "56",
+                    "presetUnits": "0.00",
+                    "token": "60935228333254395859",
+                    "refund": "0.00",
+                    "accountName": "OROGADE ABIOLA OLUSEGUN",
+                    "balance": "0.00",
+                    "product": "IE Energy",
+                    "receiptNO": "240905728773",
+                    "manuf": "Conlog Electricity",
+                    "address": "9, OGUNNAIKE STREET, SHANGISHA MAGODO",
+                    "orgNO": "010614",
+                    "meterSerialNO": "45062897314",
+                    "orgName": "MAGODO MEGA",
+                    "transactionDate": "20240312092534",
+                    "transactionStatus": true,
+                    "transactionState": "successful",
+                    "vatRate": "0.08",
+                    "units": "32.7",
+                    "adjustUnits": "0.00",
+                    "accountType": "NMD",
+                    "tariffName": "A-Non MD",
+                    "kct": ["0000000000000000", "0000000000000000"],
+                    "list": {
+                        "index": [
+                        {
+                            "feeType": "outstandingDebt",
+                            "feeAmount": "500.00"
+                        },
+                        {
+                            "feeType": "lor",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "fixedCharge",
+                            "feeAmount": "0"
+                        },
+                        {
+                            "feeType": "vat",
+                            "feeAmount": "146.67"
+                        },
+                        {
+                            "feeType": "costOfUnit",
+                            "feeAmount": "1833.33"
+                        },
+                        {
+                            "feeType": "administrativeCharge",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "loan",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "meterCost",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "reconnectionFee",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "installationFee",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "penalty",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "currentCharge",
+                            "feeAmount": "0.00"
+                        },
+                        {
+                            "feeType": "msc",
+                            "feeAmount": "0.00"
+                        }
+                        ],
+                        "ref": "creditBreakdown"
+                }
+            }
+        }
+    ],
+    "profile": [
+        {
+            "id": "name",
+            "name": "typicode"
+        }
+    ],
+    "comments": [
+        {
+            "id": "1",
+            "text": "a comment about post 1",
+            "postId": "1"
+        },
+        {
+            "id": "2",
+            "text": "another comment about post 1",
+            "postId": "1"
+        }
+  ]
 }
